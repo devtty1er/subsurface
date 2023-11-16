@@ -645,7 +645,7 @@ for (( i=0 ; i < ${#BUILDS[@]} ; i++ )) ; do
 		rm -rf Subsurface-mobile.app
 	fi
 
-	LIBRARY_PATH=$INSTALL_ROOT/lib make -j4
+	LIBRARY_PATH=$INSTALL_ROOT/lib make VERBOSE=1 -j4
 	LIBRARY_PATH=$INSTALL_ROOT/lib make install
 
 	if [ "$CREATE_APPDIR" = "1" ] ; then

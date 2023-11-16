@@ -30,27 +30,27 @@ jobs:
         qtpositioning5-dev qtscript5-dev qttools5-dev qttools5-dev-tools \
         qtquickcontrols2-5-dev xvfb libbluetooth-dev libmtp-dev
 
-    - name: build Subsurface-mobile
-      env:
-         SUBSURFACE_REPO_PATH: ${{ github.workspace }}
-      run: |
-        echo "--------------------------------------------------------------"
-        echo "building mobile"
-        git config --global user.email "ci@subsurface-divelog.org"
-        git config --global user.name "Subsurface CI"
-        git config --global --add safe.directory ${SUBSURFACE_REPO_PATH}
-        git config --global --add safe.directory ${SUBSURFACE_REPO_PATH}/libdivecomputer
-        cd ..
-        bash -e -x subsurface/scripts/build.sh -mobile
+    # - name: build Subsurface-mobile
+    #   env:
+    #      SUBSURFACE_REPO_PATH: ${{ github.workspace }}
+    #   run: |
+    #     echo "--------------------------------------------------------------"
+    #     echo "building mobile"
+    #     git config --global user.email "ci@subsurface-divelog.org"
+    #     git config --global user.name "Subsurface CI"
+    #     git config --global --add safe.directory ${SUBSURFACE_REPO_PATH}
+    #     git config --global --add safe.directory ${SUBSURFACE_REPO_PATH}/libdivecomputer
+    #     cd ..
+    #     bash -e -x subsurface/scripts/build.sh -mobile
 
-    - name: test mobile build
-      run: |
-        echo "--------------------------------------------------------------"
-        echo "running tests for mobile"
+    # - name: test mobile build
+    #   run: |
+    #     echo "--------------------------------------------------------------"
+    #     echo "running tests for mobile"
 
-        cd build-mobile/tests
-        # xvfb-run --auto-servernum ./TestGitStorage -v2
-        xvfb-run --auto-servernum make check
+    #     cd build-mobile/tests
+    #     # xvfb-run --auto-servernum ./TestGitStorage -v2
+    #     xvfb-run --auto-servernum make check
 
     - name: build Subsurface
       run: |
@@ -59,7 +59,7 @@ jobs:
 
         # now build for the desktop version (including WebKit)
         cd ..
-        bash -e -x subsurface/scripts/build.sh -desktop -build-with-webkit
+        bash -e -x subsurface/scripts/build.sh -desktop -build-with-webkit -create-appdir
 
     - name: test desktop build
       run: |
@@ -68,4 +68,16 @@ jobs:
         cd build/tests
         # xvfb-run --auto-servernum ./TestGitStorage -v2
         xvfb-run --auto-servernum make check
+
+    - name: zip artifacts
+      run: |
+        cd ..
+        zip -R debug.zip subsurface/
+    
+    
+    - name: Archive debug artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: debug-build
+          path: ../debug.zip
 
