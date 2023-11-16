@@ -75,14 +75,14 @@ jobs:
         # xvfb-run --auto-servernum ./TestGitStorage -v2
         xvfb-run --auto-servernum make check
 
-    - name: zip artifacts
-      run: |
-        cd ..
-        zip -R debug.zip subsurface/
+    # - name: zip artifacts
+    #   run: |
+    #     cd 
+    #     zip -R debug.zip subsurface/
     
     
     - name: Archive debug artifacts
       uses: actions/upload-artifact@v3
       with:
         name: debug-build
-        path: ../debug.zip
+        path: build/
