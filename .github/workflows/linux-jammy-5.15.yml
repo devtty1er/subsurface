@@ -1,11 +1,6 @@
 name: Ubuntu 22.04 / Qt 5.15--
-on:
-  push:
-    branches:
-    - master
-  pull_request:
-    branches:
-    - master
+on: workflow_dispatch
+
 
 jobs:
   buildUbuntuJammy:
