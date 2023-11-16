@@ -53,6 +53,8 @@ jobs:
     #     xvfb-run --auto-servernum make check
 
     - name: build Subsurface
+      env:
+        SUBSURFACE_REPO_PATH: ${{ github.workspace }}
       run: |
         echo "--------------------------------------------------------------"
         echo "building desktop"
