@@ -85,5 +85,5 @@ jobs:
       with:
         name: debug-build
         path: |
-        install-root
-        appdir
+          install-root
+          appdir
