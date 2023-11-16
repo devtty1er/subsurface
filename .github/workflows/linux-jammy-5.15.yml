@@ -77,12 +77,13 @@ jobs:
 
     # - name: zip artifacts
     #   run: |
-    #     cd 
-    #     zip -R debug.zip subsurface/
+    #     zip -R debug.zip ./*
     
     
     - name: Archive debug artifacts
       uses: actions/upload-artifact@v3
       with:
         name: debug-build
-        path: build/
+        path: |
+        install-root
+        appdir
