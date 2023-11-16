@@ -76,8 +76,7 @@ jobs:
     
     
     - name: Archive debug artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: debug-build
-          path: ../debug.zip
-
+      uses: actions/upload-artifact@v3
+      with:
+        name: debug-build
+        path: ../debug.zip
