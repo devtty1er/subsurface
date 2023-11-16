@@ -56,7 +56,10 @@ jobs:
       run: |
         echo "--------------------------------------------------------------"
         echo "building desktop"
-
+        git config --global user.email "ci@subsurface-divelog.org"
+        git config --global user.name "Subsurface CI"
+        git config --global --add safe.directory ${SUBSURFACE_REPO_PATH}
+        git config --global --add safe.directory ${SUBSURFACE_REPO_PATH}/libdivecomputer
         # now build for the desktop version (including WebKit)
         cd ..
         bash -e -x subsurface/scripts/build.sh -desktop -build-with-webkit -create-appdir
